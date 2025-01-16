@@ -1,0 +1,50 @@
+.sidebar {
+    min-height: 100vh;
+    height: 100%;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    display: flex;
+    align-items: center;
+
+    &__menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin: 0 auto;
+
+        &-item {
+            margin-bottom: 15px;
+            width: fit-content;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            a {
+                text-decoration: none;
+                color: #ecf0f1;
+                font-size: 1rem;
+                padding-bottom: 5px;
+                display: block;
+            }
+
+            &--active {
+                border-bottom: 2px solid#3498db;
+                color: #ffffff;
+            }
+        }
+    }
+
+    @media (max-width: 1280px) {
+        &__menu {
+            &-item {
+                margin: 0 5px;
+
+                a {
+                    font-size: 0.9rem;
+                    padding: 8px 10px;
+                }
+            }
+        }
+    }
+}
