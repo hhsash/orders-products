@@ -61,8 +61,12 @@ h6 {
         text-align: center;
     }
 
+    @media (max-width: 1280px) {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+
     @media (max-width: 768px) {
-        grid-template-columns: 1fr; // делаем карточки вертикальными
+        grid-template-columns: 1fr;
         text-align: left;
 
         &__column {

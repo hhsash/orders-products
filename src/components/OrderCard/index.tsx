@@ -2,8 +2,10 @@
 
 import React, { useState, Suspense, lazy } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslations } from 'next-intl';
 import { removeOrder } from '@/redux/slices/ordersSlice';
 import type { Order } from '@/types/Order';
+import Loading from '@/components/shared/Loading';
 
 const Modal = lazy(() => import('@/components/shared/Modal'));
 const ProductCard = lazy(() => import('@/components/ProductCard'));
@@ -13,6 +15,9 @@ type OrderCardProps = {
 };
 
 const OrderCard = ({ order }: OrderCardProps) => {
+    const cardTranslate = useTranslations('OrderCard');
+    const sharedTranslate = useTranslations('Shared');
+
     const [isShowModal, setIsShowModal] = useState(false);
     const [isShowDetails, setIsShowDetails] = useState(false);
 
@@ -37,7 +42,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
                     <span>{order.totalPrice.inUah()}</span>
                 </div>
                 <span className='item-card__column item-card__count'>
-                    Кол-во продуктов: {order.productCount}
+                    {cardTranslate('productsCount')} {order.productCount}
                 </span>
                 <button
                     className='btn btn-danger'
@@ -48,11 +53,11 @@ const OrderCard = ({ order }: OrderCardProps) => {
                         setIsShowModal(true);
                     }}
                 >
-                    Удалить
+                    {sharedTranslate('delete')}
                 </button>
             </div>
             {isShowDetails && (
-                <Suspense fallback={<p>Loading product details...</p>}>
+                <Suspense fallback={<Loading />}>
                     <div className='p-3 card'>
                         <button
                             type='button'
@@ -60,7 +65,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
                             className='btn-close'
                             aria-label='Close'
                         />
-                        <span className='mb-3'>Продукты:</span>
+                        <span className='mb-3'>{cardTranslate('products')}</span>
                         <ul>
                             {order.products.map((product) => (
                                 <li key={product.id}>
@@ -78,7 +83,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
                         handleRemove();
                         setIsShowModal(false);
                     }}
-                    title='Вы действительно хотите удалить данный приход?'
+                    title={cardTranslate('deleteModalTitle')}
                 />
             )}
         </>

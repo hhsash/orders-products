@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
 import { fetchOrders, selectFormattedOrders } from '@/redux/slices/ordersSlice';
 import OrderCard from '@/components/OrderCard';
+import Loading from '@/components/shared/Loading';
+import ErrorMessage from '@/components/shared/ErrorMessage';
 
 const Orders = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -18,16 +20,11 @@ const Orders = () => {
     }, [dispatch, data]);
 
     if (isLoading) {
-        return <p>Loading products...</p>;
+        return <Loading />;
     }
 
     if (error) {
-        return (
-            <div>
-                <p>Error: {error}</p>
-                <button onClick={fetchOrders}>Retry</button>
-            </div>
-        );
+        return <ErrorMessage error={error} onRetry={() => dispatch(fetchOrders())} />;
     }
 
     return (

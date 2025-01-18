@@ -1,0 +1,36 @@
+{
+    "HomePage": {
+        "title": "Это тестовое задание Orders&Products :)"
+    },
+    "OrdersPage": {
+        "title": "Приходы",
+        "description": "Просмотр всех приходов"
+    },
+    "ProductsPage": {
+        "title": "Продукты",
+        "description": "Просмотр всех продуктов"
+    },
+    "NavMenu": {
+        "main": "Главная",
+        "orders": "Приходы",
+        "products": "Продукты"
+    },
+    "ProductTypes": {
+        "monitors": "Мониторы",
+        "keyboards": "Клавиатуры",
+        "headphones": "Наушники",
+        "speakers": "Колонки",
+        "all": "Все"
+    },
+    "Shared": {
+        "tryAgain": "Попробовать снова",
+        "loading": "Идёт загрузка...",
+        "error": "Ошибка:",
+        "delete": "Удалить"
+    },
+    "OrderCard": {
+        "productsCount": "Кол-во продуктов:",
+        "products": "Продукты:",
+        "deleteModalTitle": "Вы действительно хотите удалить данный приход?"
+    }
+}
