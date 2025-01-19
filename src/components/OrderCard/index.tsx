@@ -4,6 +4,7 @@ import React, { useState, Suspense, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslations } from 'next-intl';
 import { removeOrder } from '@/redux/slices/ordersSlice';
+import { motion, AnimatePresence } from 'framer-motion';
 import type { Order } from '@/types/Order';
 import Loading from '@/components/shared/Loading';
 
@@ -29,53 +30,73 @@ const OrderCard = ({ order }: OrderCardProps) => {
 
     return (
         <>
-            <div className='item-card' onClick={() => setIsShowDetails((prev) => !prev)}>
-                <span className='item-card__column item-card__title'>{order.title}</span>
-                <div className='item-card__column item-card__guarantee-dates'>
-                    <span className='d-block mb-2'>
-                        {order.formattedDates.localeDateString(order.date)}
-                    </span>
-                    <span>{order.formattedDates.localString(order.date)}</span>
-                </div>
-                <div className='item-card__column item-card__currencies'>
-                    <span className='d-block mb-2'>{order.totalPrice.inUsd()}</span>
-                    <span>{order.totalPrice.inUah()}</span>
-                </div>
-                <span className='item-card__column item-card__count'>
-                    {cardTranslate('productsCount')} {order.productCount}
-                </span>
-                <button
-                    className='btn btn-danger'
-                    style={{ width: 'fit-content', margin: '0 auto' }}
-                    type='button'
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        setIsShowModal(true);
-                    }}
-                >
-                    {sharedTranslate('delete')}
-                </button>
-            </div>
-            {isShowDetails && (
-                <Suspense fallback={<Loading />}>
-                    <div className='p-3 card'>
-                        <button
-                            type='button'
-                            onClick={() => setIsShowDetails(false)}
-                            className='btn-close'
-                            aria-label='Close'
-                        />
-                        <span className='mb-3'>{cardTranslate('products')}</span>
-                        <ul>
-                            {order.products.map((product) => (
-                                <li key={product.id}>
-                                    <ProductCard product={product} />
-                                </li>
-                            ))}
-                        </ul>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                className='card mb-3'
+                style={{ cursor: 'pointer' }}
+                onClick={() => setIsShowDetails((prev) => !prev)}
+            >
+                <div className='card-body'>
+                    <h5 className='card-title'>{order.title}</h5>
+                    <p className='card-text'>
+                        <strong>{cardTranslate('productsCount')}</strong>: {order.productCount}
+                    </p>
+                    <div className='d-flex justify-content-between'>
+                        <div>
+                            <strong>{cardTranslate('date')}</strong>
+                            <div>{order.formattedDates.localeDateString(order.date)}</div>
+                            <div>{order.formattedDates.localString(order.date)}</div>
+                        </div>
+                        <div>
+                            <strong>{cardTranslate('totalPrice')}</strong>
+                            <div>{order.totalPrice.inUsd()}</div>
+                            <div>{order.totalPrice.inUah()}</div>
+                        </div>
                     </div>
-                </Suspense>
-            )}
+                    <button
+                        className='btn btn-danger btn-sm mt-3'
+                        type='button'
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsShowModal(true);
+                        }}
+                    >
+                        {sharedTranslate('delete')}
+                    </button>
+                </div>
+            </motion.div>
+
+            <AnimatePresence>
+                {isShowDetails && (
+                    <Suspense fallback={<Loading />}>
+                        <motion.div
+                            className='card p-3 mb-3'
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <button
+                                type='button'
+                                onClick={() => setIsShowDetails(false)}
+                                className='btn-close'
+                                aria-label='Close'
+                            />
+                            <h5 className='mb-3'>{cardTranslate('products')}</h5>
+                            <ul className='list-unstyled'>
+                                {order.products.map((product) => (
+                                    <li key={product.id} className='mb-2'>
+                                        <ProductCard product={product} />
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+                    </Suspense>
+                )}
+            </AnimatePresence>
+
             {isShowModal && (
                 <Modal
                     onClose={() => setIsShowModal(false)}

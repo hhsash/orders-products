@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useLayoutEffect, useState } from 'react';
+import LanguageSwitcher from '@/components/shared/LanguageSwitcher';
 import './styles.scss';
 
 export default function TopMenu() {
@@ -14,7 +15,10 @@ export default function TopMenu() {
     return (
         <header className='header d-flex justify-content-between align-items-center'>
             <span>Orders & Products</span>
-            <span>{date || 'Loading...'}</span>
+            <div className='d-flex align-items-center'>
+                <span className='mx-2'>{date || 'Loading...'}</span>
+                <LanguageSwitcher />
+            </div>
         </header>
     );
 }

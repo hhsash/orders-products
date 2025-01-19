@@ -21,6 +21,9 @@
         "keyboards": "Keyboards",
         "headphones": "Headphones",
         "speakers": "Speakers",
+        "cameras": "Cameras",
+        "mice": "Mice",
+        "docks": "Docks",
         "all": "All"
     },
     "Shared": {
@@ -30,8 +33,15 @@
         "delete": "Delete"
     },
     "OrderCard": {
-        "productsCount": "Number of products:",
+        "productsCount": "Number of products",
         "products": "Products:",
-        "deleteModalTitle": "Are you sure you want to delete this order?"
+        "deleteModalTitle": "Are you sure you want to delete this order?",
+        "date": "Date",
+        "totalPrice": "Total price"
+    },
+    "ProductCard": {
+        "type": "Type",
+        "price": "Price",
+        "guarantee": "Guarantee"
     }
 }

@@ -39,7 +39,7 @@ const Products = () => {
     return (
         <>
             {filteredData && (
-                <div className='mb-3 col-3'>
+                <div className='mb-3 col-12 col-sm-3 col-lg-2'>
                     <select
                         className='form-select'
                         id='exampleSelect'

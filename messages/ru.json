@@ -20,6 +20,9 @@
         "keyboards": "Клавиатуры",
         "headphones": "Наушники",
         "speakers": "Колонки",
+        "cameras": "Камеры",
+        "mice": "Мыши",
+        "docks": "Док-станции",
         "all": "Все"
     },
     "Shared": {
@@ -29,8 +32,15 @@
         "delete": "Удалить"
     },
     "OrderCard": {
-        "productsCount": "Кол-во продуктов:",
-        "products": "Продукты:",
-        "deleteModalTitle": "Вы действительно хотите удалить данный приход?"
+        "productsCount": "Кол-во продуктов",
+        "products": "Продукты",
+        "deleteModalTitle": "Вы действительно хотите удалить данный приход?",
+        "date": "Дата",
+        "totalPrice": "Сумма"
+    },
+    "ProductCard": {
+        "type": "Тип",
+        "price": "Цена",
+        "guarantee": "Гарантия"
     }
 }
