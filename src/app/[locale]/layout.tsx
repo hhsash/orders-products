@@ -8,10 +8,7 @@ import NavigationMenu from '@/components/shared/NavigationMenu';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './globals.scss';
 
-type Props = {
-    children: React.ReactNode;
-    params: { locale: string };
-};
+type Params = Promise<{ locale: string }>;
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -27,7 +24,8 @@ export function generateStaticParams() {
     return SUPPORTED_LOCALES.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params: { locale } }: Omit<Props, 'children'>) {
+export async function generateMetadata(props: { params: Params }) {
+    const { locale } = await props.params;
     const t = await getTranslations({ locale, namespace: 'HomePage' });
 
     return {
@@ -35,7 +33,8 @@ export async function generateMetadata({ params: { locale } }: Omit<Props, 'chil
     };
 }
 
-export default async function RootLayout({ children, params: { locale } }: Readonly<Props>) {
+export default async function RootLayout(props: { children: React.ReactNode; params: Params }) {
+    const { locale } = await props.params;
     const messages = await getMessages();
 
     return (
@@ -47,7 +46,7 @@ export default async function RootLayout({ children, params: { locale } }: Reado
                         <main className='d-flex'>
                             <NavigationMenu locale={locale} />
                             <div className='content__wrapper col-9 col-sm-10 col-lg-11 p-3'>
-                                {children}
+                                {props.children}
                             </div>
                         </main>
                     </NextIntlClientProvider>
