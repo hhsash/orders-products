@@ -1,14 +1,17 @@
 {
     "HomePage": {
-        "title": "Это тестовое задание Orders&Products :)"
+        "title": "Это тестовое задание Orders&Products :)",
+        "description": "В этом приложении Вы можете просмотреть информацию о приходах и продуктах"
     },
     "OrdersPage": {
         "title": "Приходы",
-        "description": "Просмотр всех приходов"
+        "description": "Просмотр всех приходов",
+        "emptyList": "Список приходов пуст"
     },
     "ProductsPage": {
         "title": "Продукты",
-        "description": "Просмотр всех продуктов"
+        "description": "Просмотр всех продуктов",
+        "emptyList": "Список продуктов пуст"
     },
     "NavMenu": {
         "main": "Главная",

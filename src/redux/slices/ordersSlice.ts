@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/redux/store';
+import { getPriceString } from '@/utils/priceUtils';
 import axios from 'axios';
 import { Order } from '@/types/Order';
 
@@ -67,13 +68,14 @@ export const selectFormattedOrders = (state: RootState) => {
     const formattedData = data?.map((order) => ({
         ...order,
         formattedDates: {
-            localeDateString: (date: string) => {
+            localeDateString: (date: string, locale: string) => {
                 const options: Intl.DateTimeFormatOptions = {
                     day: 'numeric',
                     month: 'long',
                     year: 'numeric',
                 };
-                return new Date(date).toLocaleDateString('ru-RU', options);
+                const lang = `${locale}-${locale.toUpperCase()}`;
+                return new Date(date).toLocaleDateString(lang, options);
             },
             localString: (date: string) => new Date(date).toLocaleString(),
         },
@@ -94,6 +96,13 @@ export const selectFormattedOrders = (state: RootState) => {
             },
         },
         productCount: order.products.length,
+        products: order.products.map((product) => ({
+            ...product,
+            priceToString: {
+                inUsd: () => getPriceString(product.price, 'USD'),
+                inUah: () => getPriceString(product.price, 'UAH'),
+            },
+        })),
     }));
 
     return { isLoading, error, data: formattedData };

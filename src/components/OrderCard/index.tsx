@@ -2,7 +2,7 @@
 
 import React, { useState, Suspense, lazy } from 'react';
 import { useDispatch } from 'react-redux';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { removeOrder } from '@/redux/slices/ordersSlice';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Order } from '@/types/Order';
@@ -18,6 +18,7 @@ type OrderCardProps = {
 const OrderCard = ({ order }: OrderCardProps) => {
     const cardTranslate = useTranslations('OrderCard');
     const sharedTranslate = useTranslations('Shared');
+    const locale = useLocale();
 
     const [isShowModal, setIsShowModal] = useState(false);
     const [isShowDetails, setIsShowDetails] = useState(false);
@@ -46,7 +47,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
                     <div className='d-flex justify-content-between'>
                         <div>
                             <strong>{cardTranslate('date')}</strong>
-                            <div>{order.formattedDates.localeDateString(order.date)}</div>
+                            <div>{order.formattedDates.localeDateString(order.date, locale)}</div>
                             <div>{order.formattedDates.localString(order.date)}</div>
                         </div>
                         <div>

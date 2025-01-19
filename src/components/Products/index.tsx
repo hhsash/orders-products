@@ -12,7 +12,8 @@ import ErrorMessage from '@/components/shared/ErrorMessage';
 
 const Products = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const t = useTranslations('ProductTypes');
+    const productTypesTranslate = useTranslations('ProductTypes');
+    const ordersPageTranslate = useTranslations('OrdersPage');
 
     const { filteredData, data, isLoading, error } = useSelector(selectProductsState);
 
@@ -36,25 +37,20 @@ const Products = () => {
         dispatch(filterProducts(e.target.value));
     };
 
-    return (
+    return filteredData?.length === 0 ? (
+        <p>{ordersPageTranslate('emptyList')}</p>
+    ) : (
         <>
-            {filteredData && (
-                <div className='mb-3 col-12 col-sm-3 col-lg-2'>
-                    <select
-                        className='form-select'
-                        id='exampleSelect'
-                        onChange={onSelectHandle}
-                        defaultValue='All'
-                    >
-                        <option value='All'>{t('all')}</option>
-                        {types.map((type) => (
-                            <option key={type} value={type}>
-                                {t(type.toLowerCase())}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            )}
+            <div className='mb-3 col-12 col-sm-3 col-lg-2'>
+                <select className='form-select' onChange={onSelectHandle} defaultValue='All'>
+                    <option value='All'>{productTypesTranslate('all')}</option>
+                    {types.map((type) => (
+                        <option key={type} value={type}>
+                            {productTypesTranslate(type.toLowerCase())}
+                        </option>
+                    ))}
+                </select>
+            </div>
             <ul className='card-list'>
                 {filteredData?.map((product) => (
                     <li key={product.id}>

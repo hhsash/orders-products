@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/redux/store';
+import { getPriceString } from '@/utils/priceUtils';
 import axios from 'axios';
 import type { Product } from '@/types/Product';
 
@@ -38,9 +39,8 @@ export const selectProductsState = (state: RootState) => ({
     filteredData: state.products.filteredData?.map((product) => ({
         ...product,
         priceToString: {
-            inUsd: () => `${product?.price?.find((item) => item?.symbol === 'USD')?.value || 0} $`,
-            inUah: () =>
-                `${product?.price?.find((item) => item?.symbol === 'UAH')?.value || 0} UAH`,
+            inUsd: () => getPriceString(product.price, 'USD'),
+            inUah: () => getPriceString(product.price, 'UAH'),
         },
     })),
 });

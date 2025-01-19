@@ -10,8 +10,8 @@ export type Order = {
         inUah: () => string;
     };
     formattedDates: {
-        localString: (arg: string) => string;
-        localeDateString: (arg: string) => string;
+        localString: (date: string) => string;
+        localeDateString: (date: string, locale: string) => string;
     };
     productCount: number;
     readonly products: Product[];

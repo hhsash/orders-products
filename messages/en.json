@@ -1,15 +1,17 @@
 {
     "HomePage": {
-        "title": "Home",
-        "description": "Home page"
+        "title": "This is a test task for Orders&Products :)",
+        "description": "In this application, you can view information about orders and products."
     },
     "OrdersPage": {
         "title": "Orders",
-        "description": "All orders"
+        "description": "All orders",
+        "emptyList": "Orders list is empty"
     },
     "ProductsPage": {
         "title": "Products",
-        "description": "All products"
+        "description": "All products",
+        "emptyList": "Products list is empty"
     },
     "NavMenu": {
         "main": "Main",
