@@ -32,7 +32,8 @@
         "tryAgain": "Try again",
         "loading": "Loading...",
         "error": "Error:",
-        "delete": "Delete"
+        "delete": "Delete",
+        "cancel": "Cancel"
     },
     "OrderCard": {
         "productsCount": "Number of products",

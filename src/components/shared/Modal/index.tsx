@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 type ModalProps = {
     onClose: () => void;
@@ -8,6 +11,8 @@ type ModalProps = {
 };
 
 const Modal = ({ onClose, onSubmit, title, body }: ModalProps) => {
+    const t = useTranslations('Shared');
+
     return (
         <>
             <div className='modal' style={{ display: 'block' }} role='dialog'>
@@ -25,10 +30,10 @@ const Modal = ({ onClose, onSubmit, title, body }: ModalProps) => {
                         {body && <div className='modal-body'>{body}</div>}
                         <div className='modal-footer justify-content-between px-5'>
                             <button type='button' className='btn btn-secondary' onClick={onClose}>
-                                Отмена
+                                {t('cancel')}
                             </button>
                             <button type='button' className='btn btn-primary' onClick={onSubmit}>
-                                Удалить
+                                {t('delete')}
                             </button>
                         </div>
                     </div>

@@ -32,7 +32,8 @@
         "tryAgain": "Попробовать снова",
         "loading": "Идёт загрузка...",
         "error": "Ошибка:",
-        "delete": "Удалить"
+        "delete": "Удалить",
+        "cancel": "Отмена"
     },
     "OrderCard": {
         "productsCount": "Кол-во продуктов",
